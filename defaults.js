@@ -46,6 +46,7 @@ module.exports = {
     '@apostrophecms/ui': {},
     '@apostrophecms/user': {},
     '@apostrophecms/image': {},
+    '@apostrophecms/image-widget': {},
     '@apostrophecms/image-tag': {},
     '@apostrophecms/file': {},
     '@apostrophecms/file-tag': {},

@@ -3,7 +3,15 @@ module.exports = {
   options: {
     color: 'blue'
   },
-  init(self, options) {
-    console.log('>> ' + self.options.color);
+  handlers(self, options) {
+    return {
+      // Log the color option very late so we're sure
+      // any damage has already been done
+      'apostrophe:afterInit': {
+        logColor() {
+          console.log('>> ' + self.options.color);
+        }
+      }
+    };
   }
 };

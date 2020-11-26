@@ -408,7 +408,7 @@ module.exports = {
         }
         const req = self.apos.task.getReq();
 
-        const { password } = prompts(
+        const { password } = await prompts(
           {
             type: 'password',
             name: 'password',
@@ -442,7 +442,7 @@ module.exports = {
           throw new Error('No such user.');
         }
 
-        const { password } = prompts(
+        const { password } = await prompts(
           {
             type: 'password',
             name: 'password',

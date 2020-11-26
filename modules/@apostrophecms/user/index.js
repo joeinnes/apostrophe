@@ -413,8 +413,8 @@ module.exports = {
             type: 'password',
             name: 'password',
             message: `Enter a password for ${username}:`,
-            validate () {
-              return 'Password is required';
+            validate (input) {
+              return input ? true : 'Password is required';
             }
           }
         );
@@ -447,8 +447,8 @@ module.exports = {
             type: 'password',
             name: 'password',
             message: `Change password for ${username} to:`,
-            validate () {
-              return 'Password is required';
+            validate (input) {
+              return input ? true : 'Password is required';
             }
           }
         );

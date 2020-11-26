@@ -30,7 +30,7 @@
 // such as `@apostrophecms/signup`.
 
 const credential = require('credential');
-const prompt = require('prompt');
+const prompts = require('prompts');
 const Promise = require('bluebird');
 
 module.exports = {
@@ -407,18 +407,20 @@ module.exports = {
           throw 'You must specify --username=usernamehere';
         }
         const req = self.apos.task.getReq();
-        prompt.start();
-        const result = await Promise.promisify(prompt.get, { context: prompt })({
-          properties: {
-            password: {
-              required: true,
-              hidden: true
+
+        const { password } = prompts(
+          {
+            type: 'password',
+            name: 'password',
+            validate () {
+              return 'Password is required';
             }
           }
-        });
+        );
+
         return self.apos.user.insert(req, {
           username: username,
-          password: result.password,
+          password: password,
           title: username,
           firstName: username
         });
@@ -439,16 +441,15 @@ module.exports = {
           throw new Error('No such user.');
         }
 
-        prompt.start();
-
-        const { password } = await Promise.promisify(prompt.get, { context: prompt })({
-          properties: {
-            password: {
-              required: true,
-              hidden: true
+        const { password } = prompts(
+          {
+            type: 'password',
+            name: 'password',
+            validate () {
+              return 'Password is required';
             }
           }
-        });
+        );
 
         // This module's docBeforeUpdate handler does all the magic here
         user.password = password;
